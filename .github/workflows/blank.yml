@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - run: yarn add
+      - run: yarn rekease
       
   publish-npm:
     needs: build
