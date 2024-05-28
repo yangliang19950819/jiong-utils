@@ -14,7 +14,6 @@ jobs:
         with:
           node-version: 18.x
       - run: yarn 
-      - run: yarn release
 
   publish-npm:
     needs: build
