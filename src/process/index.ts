@@ -40,5 +40,4 @@ export const throttle = (fn:Fn, limit:number) :Fn => {
     }
 }
 
-
 console.log(i18n.t("greeting"));
