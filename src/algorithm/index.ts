@@ -46,4 +46,26 @@ export const modifyValues = (obj: NestedObject, modifyFunc: (value: any) => any)
     }
   
     recurse(obj);
-  }
+}
+
+type Curried<T> = T extends (...args: infer A) => infer R
+  ? A extends [infer F, ...infer Rest]
+    ? (arg: F) => Curried<(...args: Rest) => R>
+    : R
+  : never;
+
+/**
+ * 递归对每个值进行操作
+ * @param func 执行的函数
+ * @category Algorithm
+ */
+
+export const curry = <T extends (...args: any[]) => any> (func: T) : Curried<T> => {
+  return function curried (...args: any[]): any {
+    if(args.length >= func.length){
+      func(...args)
+    }else{
+      return (...args1: any[]) => curried(...args, ...args1)
+    }
+  } as Curried<T>
+}
