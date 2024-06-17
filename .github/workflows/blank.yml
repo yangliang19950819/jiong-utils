@@ -18,7 +18,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn
 
       - name: Create release PR
         run: release-please release-pr --token=${{ secrets.npm_token }} --repo-url=${{ github.repository }}
