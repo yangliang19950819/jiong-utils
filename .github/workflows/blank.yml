@@ -1,25 +1,25 @@
-name: Create Release PR
+name: auto-release
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+  
+permissions:
+  contents: write
+  pull-requests: write
+
 
 jobs:
-  release-pr:
+  release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: google-github-actions/release-please-action@v4
+        id: release-please
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Create release PR
-        run: release-please release-pr --token=${{ secrets.npm_token }} --repo-url=${{ github.repository }}
+          token: ${{ secrets.npm_token }}
+          release-type: node 
+          package-name: your-repo-name
+          default-branch: main
 
